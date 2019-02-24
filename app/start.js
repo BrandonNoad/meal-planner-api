@@ -7,7 +7,7 @@ const knexConfig = require('../knexfile');
 // Initialize the ORM.
 orm.init(knexConfig);
 
-const routeRegistrationOptions = { prefix: '/api/v1.0' };
+const routeRegistrationOptions = { prefix: '/v1.0' };
 
 const pluginOptions = {
     pagination: {
