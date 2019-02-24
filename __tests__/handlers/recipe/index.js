@@ -35,7 +35,7 @@ describe('fetchAllPaginated', () => {
 
                 delete request.plugins['total-count'];
             });
-            const fetchPage = (page, limit) => Promise.resolve({ results, totalCount });
+            const fetchPage = () => Promise.resolve({ results, totalCount });
 
             const handler = fetchAllPaginatedFactory({ fetchPage });
 
@@ -52,7 +52,7 @@ describe('fetchAllPaginated', () => {
             });
 
             it(`should set request.plugins['total-count'] for the total-count plugin`, async () => {
-                const result = await handler(request);
+                await handler(request);
 
                 expect(request.plugins['total-count']).toEqual({ totalCount });
             });
@@ -60,7 +60,7 @@ describe('fetchAllPaginated', () => {
     });
 
     describe('when the repository function fails', () => {
-        const fetchPage = (page, limit) => Promise.reject(new Error('repository function failed!'));
+        const fetchPage = () => Promise.reject(new Error('repository function failed!'));
 
         const handler = fetchAllPaginatedFactory({ fetchPage });
 

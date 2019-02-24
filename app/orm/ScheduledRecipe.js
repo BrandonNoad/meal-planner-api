@@ -1,5 +1,5 @@
-const BaseModel = require('./BaseModel');
 const { BelongsToOneRelation } = require('objection');
+const BaseModel = require('./BaseModel');
 
 class ScheduledRecipe extends BaseModel {
     static get tableName() {

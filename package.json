@@ -3,11 +3,12 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "test": "jest",
-        "start": "node app/start.js",
         "develop": "npm run migrate && nodemon --watch app",
+        "lint": "eslint .",
         "migrate": "knex migrate:latest",
-        "postinstall": "([ \"$NODE_ENV\" = production ] && npm run migrate) || ([ \"$NODE_ENV\" != production ] && echo 'Development mode...')"
+        "postinstall": "([ \"$NODE_ENV\" = production ] && npm run migrate) || ([ \"$NODE_ENV\" != production ] && echo 'Development mode...')",
+        "start": "node app/start.js",
+        "test": "jest"
     },
     "author": "",
     "license": "ISC",
@@ -25,8 +26,13 @@
         "pg": "^7.8.0"
     },
     "devDependencies": {
+        "eslint": "^5.3.0",
+        "eslint-config-prettier": "^4.0.0",
+        "eslint-plugin-jest": "^22.3.0",
+        "eslint-plugin-prettier": "^3.0.1",
         "jest": "^24.1.0",
         "nodemon": "^1.18.10",
+        "prettier": "^1.16.4",
         "sqlite3": "^4.0.6"
     }
 }

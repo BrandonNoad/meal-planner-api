@@ -46,8 +46,7 @@ describe('fetchForDatePaginated', () => {
 
                 delete request.plugins['total-count'];
             });
-            const fetchPageForDate = (page, limit, date) =>
-                Promise.resolve({ results, totalCount });
+            const fetchPageForDate = () => Promise.resolve({ results, totalCount });
 
             const handler = fetchForDatePaginatedFactory({ fetchPageForDate });
 
@@ -64,7 +63,7 @@ describe('fetchForDatePaginated', () => {
             });
 
             it(`should set request.plugins['total-count'] for the total-count plugin`, async () => {
-                const result = await handler(request);
+                await handler(request);
 
                 expect(request.plugins['total-count']).toEqual({ totalCount });
             });
@@ -72,8 +71,7 @@ describe('fetchForDatePaginated', () => {
     });
 
     describe('when the repository function fails', () => {
-        const fetchPageForDate = (page, limit, date) =>
-            Promise.reject(new Error('repository function failed!'));
+        const fetchPageForDate = () => Promise.reject(new Error('repository function failed!'));
 
         const handler = fetchForDatePaginatedFactory({ fetchPageForDate });
 

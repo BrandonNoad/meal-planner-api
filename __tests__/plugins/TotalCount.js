@@ -7,7 +7,7 @@ describe('TotalCount plugin', () => {
 
     describe('Plugin registration', () => {
         describe('when getOnPostHandler returns an onPostHandler', () => {
-            const getOnPostHandler = (options) => async (request, h) => h.continue;
+            const getOnPostHandler = () => async (request, h) => h.continue;
 
             const plugin = factory(getOnPostHandler);
 
@@ -19,7 +19,7 @@ describe('TotalCount plugin', () => {
         });
 
         describe('when getOnPostHandler throws', () => {
-            const getOnPostHandler = (options) => {
+            const getOnPostHandler = () => {
                 throw new Error('test');
             };
 

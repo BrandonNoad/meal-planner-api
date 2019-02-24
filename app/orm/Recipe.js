@@ -1,5 +1,5 @@
-const BaseModel = require('./BaseModel');
 const { HasManyRelation } = require('objection');
+const BaseModel = require('./BaseModel');
 
 class Recipe extends BaseModel {
     static get tableName() {

@@ -69,7 +69,9 @@ const composeOptions = {
 // Exit gracefully on various events/signals
 const exitHandler = (options, err) => {
     if (err) {
+        /* eslint-disable no-console */
         console.log('error', err.stack);
+        /* eslint-enable no-console */
     }
 
     if (options.cleanUp) {
@@ -107,7 +109,10 @@ process.once('SIGUSR2', () => {
         server.log(['info'], `Server started at: ${server.info.uri}`);
     } catch (err) {
         // server failed to start properly...abort
+
+        /* eslint-disable no-console */
         console.log('error', `Server failure: ${err}`);
+        /* eslint-enable no-console */
 
         // clean up!
         exitHandler({ cleanUp: true });

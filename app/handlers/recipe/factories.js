@@ -14,5 +14,4 @@ exports.fetchAllPaginatedFactory = (RecipeRepository) => async (request) => {
     return results;
 };
 
-exports.fetchSuggestionsFactory = (RecipeRepository) => (request) =>
-    RecipeRepository.fetchSuggestions();
+exports.fetchSuggestionsFactory = (RecipeRepository) => () => RecipeRepository.fetchSuggestions();

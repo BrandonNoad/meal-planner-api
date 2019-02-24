@@ -9,3 +9,6 @@ meal_planner.sqlite3
 
 # Mac files
 .DS_Store
+
+# VSCode
+.vscode/
