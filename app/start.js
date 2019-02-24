@@ -30,7 +30,6 @@ const pluginOptions = {
 // manifest specifying the hapi server options, connections, and registrations
 const manifest = {
     server: {
-        host: 'localhost',
         port: process.env.PORT || 3001,
         router: {
             isCaseSensitive: false,

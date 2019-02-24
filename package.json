@@ -5,7 +5,7 @@
     "scripts": {
         "test": "jest",
         "start": "node app/start.js",
-        "develop": " nodemon --watch app",
+        "develop": "npm run migrate && nodemon --watch app",
         "migrate": "knex migrate:latest",
         "postinstall": "([ \"$NODE_ENV\" = production ] && npm run migrate) || ([ \"$NODE_ENV\" != production ] && echo 'Development mode...')"
     },
