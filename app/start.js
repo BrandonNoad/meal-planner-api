@@ -31,7 +31,7 @@ const pluginOptions = {
 const manifest = {
     server: {
         host: 'localhost',
-        port: 3001,
+        port: process.env.PORT || 3001,
         router: {
             isCaseSensitive: false,
             stripTrailingSlash: true
