@@ -1,0 +1,11 @@
+# Logs
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Development db
+meal_planner.sqlite3
+
+# Mac files
+.DS_Store

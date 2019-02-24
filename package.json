@@ -1,0 +1,31 @@
+{
+    "name": "meal-planner-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app/start.js",
+    "scripts": {
+        "test": "jest",
+        "start": "npm run migrate && nodemon --watch app",
+        "migrate": "knex migrate:latest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "boom": "^7.3.0",
+        "glue": "^6.0.0",
+        "hapi": "^18.1.0",
+        "hapi-pagination": "^2.0.1",
+        "joi": "^14.3.1",
+        "joi-date-extensions": "^1.2.0",
+        "knex": "^0.16.3",
+        "lodash": "^4.17.11",
+        "objection": "^1.6.0",
+        "pg": "^7.8.0"
+    },
+    "devDependencies": {
+        "jest": "^24.1.0",
+        "nodemon": "^1.18.10",
+        "sqlite3": "^4.0.6"
+    }
+}
