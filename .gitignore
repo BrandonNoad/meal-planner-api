@@ -12,3 +12,7 @@ meal_planner.sqlite3
 
 # VSCode
 .vscode/
+
+# Misc.
+create-jwt.js
+worksheet.js
