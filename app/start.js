@@ -10,6 +10,9 @@ orm.init(knexConfig);
 const routeRegistrationOptions = { prefix: '/v1.0' };
 
 const pluginOptions = {
+    jwtAuthStrategy: {
+        secret: process.env.JWT_SECRET
+    },
     pagination: {
         query: {
             pagination: {
@@ -42,6 +45,12 @@ const manifest = {
     },
     register: {
         plugins: [
+            'hapi-auth-bearer-token',
+            {
+                plugin: './plugins/JwtAuthStrategy',
+                options: pluginOptions.jwtAuthStrategy
+            },
+            './plugins/ServerAuthDefault',
             './plugins/TotalCount',
             {
                 plugin: 'hapi-pagination',
