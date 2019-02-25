@@ -57,6 +57,10 @@ const manifest = {
                 options: pluginOptions.pagination
             },
             {
+                plugin: './routes/auth',
+                routes: routeRegistrationOptions
+            },
+            {
                 plugin: './routes/scheduled-recipe',
                 routes: routeRegistrationOptions
             },
