@@ -11,7 +11,7 @@ class Recipe extends BaseModel {
     }
 
     static get relationMappings() {
-        const ScheduledRecipe = require('./ScheduledRecipe');
+        const { ScheduledRecipe } = require('./index');
 
         return {
             scheduledRecipes: {

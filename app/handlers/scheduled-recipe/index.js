@@ -1,11 +1,13 @@
 'use strict';
 
-const { fetchForDatePaginatedFactory } = require('./factories');
+const { fetchForTeamForDatePaginatedFactory } = require('./factories');
 
-const ScheduledRecipeRepository = require('../../repositories/ScheduledRecipeRepository');
+const ScheduledRecipeRepository = require('../../repositories/ScheduledRecipe');
 
 /**
- * Fetch all scheduledRecipes for the given date paginated.
- *  - GET /scheduledRecipes?date=YYYY-MM-DD
+ * Fetch all scheduledRecipes for the given team and date paginated.
+ *  - GET /teams/{teamId}/scheduledRecipes?date=YYYY-MM-DD
  */
-exports.fetchForDatePaginated = fetchForDatePaginatedFactory(ScheduledRecipeRepository);
+exports.fetchForTeamForDatePaginated = fetchForTeamForDatePaginatedFactory(
+    ScheduledRecipeRepository
+);

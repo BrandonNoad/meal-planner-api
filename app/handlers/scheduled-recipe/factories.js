@@ -1,11 +1,13 @@
 'use strict';
 
-exports.fetchForDatePaginatedFactory = (ScheduledRecipeRepository) => async (request) => {
+exports.fetchForTeamForDatePaginatedFactory = (ScheduledRecipeRepository) => async (request) => {
+    const { teamId } = request.params;
     const { page, limit, date } = request.query;
 
-    const { results, totalCount } = await ScheduledRecipeRepository.fetchPageForDate(
+    const { results, totalCount } = await ScheduledRecipeRepository.fetchPageForTeamForDate(
         page,
         limit,
+        teamId,
         date
     );
 

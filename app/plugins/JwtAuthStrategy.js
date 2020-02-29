@@ -1,38 +1,27 @@
 'use strict';
 
-const Jwt = require('jsonwebtoken');
+const jwksRsa = require('jwks-rsa');
 
-const factory = (exports.factory = (validateFactory) => ({
+exports.plugin = {
     name: 'jwt-auth-strategy',
-    dependencies: 'hapi-auth-bearer-token',
-    async register(server, options) {
-        server.auth.strategy('jwt', 'bearer-access-token', {
-            validate: validateFactory(options)
+    dependencies: 'hapi-auth-jwt2',
+    async register(server) {
+        server.auth.strategy('jwt', 'jwt', {
+            // We need the complete decoded token to get the kid from the header.
+            complete: true,
+            key: jwksRsa.hapiJwt2KeyAsync({
+                cache: true,
+                rateLimit: true,
+                jwksUri: process.env.JWKS_URI
+            }),
+            validate() {
+                return { isValid: true };
+            },
+            verifyOptions: {
+                audience: process.env.JWT_AUDIENCE,
+                issuer: process.env.JWT_ISSUER,
+                algorithms: ['RS256']
+            }
         });
     }
-}));
-
-const validateFactory = ({ secret }) => async (request, token) => {
-    try {
-        const credentials = Jwt.verify(token, secret);
-
-        return { isValid: true, credentials };
-    } catch (err) {
-        let credentials;
-
-        try {
-            credentials = Jwt.decode(token);
-        } catch (err) {
-            credentials = {};
-        }
-
-        if (credentials === null) {
-            credentials = {};
-        }
-
-        return { isValid: false, credentials };
-    }
 };
-
-// Make the plugin by injecting getOnPostHandler.
-exports.plugin = factory(validateFactory);

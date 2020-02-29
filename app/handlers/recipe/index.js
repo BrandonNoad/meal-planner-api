@@ -2,7 +2,7 @@
 
 const { fetchAllPaginatedFactory, fetchSuggestionsFactory } = require('./factories');
 
-const RecipeRepository = require('../../repositories/RecipeRepository');
+const RecipeRepository = require('../../repositories/Recipe');
 
 /**
  * Fetch all recipes paginated.

@@ -7,7 +7,7 @@ class ScheduledRecipe extends BaseModel {
     }
 
     static get relationMappings() {
-        const Recipe = require('./Recipe');
+        const { Recipe, Team } = require('./index');
 
         return {
             recipe: {
@@ -16,6 +16,14 @@ class ScheduledRecipe extends BaseModel {
                 join: {
                     from: 'scheduled_recipes.recipe_id',
                     to: 'recipes.id'
+                }
+            },
+            team: {
+                relation: BelongsToOneRelation,
+                modelClass: Team,
+                join: {
+                    from: 'scheduled_recipes.team_id',
+                    to: 'teams.id'
                 }
             }
         };

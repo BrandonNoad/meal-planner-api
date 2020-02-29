@@ -19,5 +19,7 @@ exports.init = (knexConfig) => {
     return knex;
 };
 
-exports.ScheduledRecipe = require('./ScheduledRecipe');
 exports.Recipe = require('./Recipe');
+exports.ScheduledRecipe = require('./ScheduledRecipe');
+exports.Team = require('./Team');
+exports.TeamMember = require('./TeamMember');

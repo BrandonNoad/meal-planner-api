@@ -13,6 +13,9 @@ meal_planner.sqlite3
 # VSCode
 .vscode/
 
+# dotenv environment variables file
+.env
+
 # Misc.
 create-jwt.js
 worksheet.js

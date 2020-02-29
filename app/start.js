@@ -1,5 +1,9 @@
 'use strict';
 
+// Load environment variables from a .env file into process.env. If the .env file is missing (e.g.
+// production), it will fail silently.
+require('dotenv').config();
+
 const Server = require('./server');
 const orm = require('./orm');
 const knexConfig = require('../knexfile');
@@ -10,9 +14,6 @@ orm.init(knexConfig);
 const routeRegistrationOptions = { prefix: '/v1.0' };
 
 const pluginOptions = {
-    jwtAuthStrategy: {
-        secret: process.env.JWT_SECRET
-    },
     pagination: {
         query: {
             pagination: {
@@ -41,24 +42,20 @@ const manifest = {
         debug: {
             log: ['error', 'info', 'debug'],
             request: ['error', 'info', 'debug']
+        },
+        routes: {
+            cors: true
         }
     },
     register: {
         plugins: [
-            'hapi-auth-bearer-token',
-            {
-                plugin: './plugins/JwtAuthStrategy',
-                options: pluginOptions.jwtAuthStrategy
-            },
+            'hapi-auth-jwt2',
+            './plugins/JwtAuthStrategy',
             './plugins/ServerAuthDefault',
             './plugins/TotalCount',
             {
                 plugin: 'hapi-pagination',
                 options: pluginOptions.pagination
-            },
-            {
-                plugin: './routes/auth',
-                routes: routeRegistrationOptions
             },
             {
                 plugin: './routes/scheduled-recipe',
