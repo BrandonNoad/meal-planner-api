@@ -5,8 +5,10 @@
         "allowSyntheticDefaultImports": true,
         "target": "es6",
         "noImplicitAny": true,
+        "alwaysStrict": true,
         "moduleResolution": "node",
         "sourceMap": true,
+        "rootDir": "src",
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {

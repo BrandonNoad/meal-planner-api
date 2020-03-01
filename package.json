@@ -2,7 +2,7 @@
     "name": "meal-planner-api",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/app/start.js",
+    "main": "dist/start.js",
     "scripts": {
         "develop": "npm-run-all -s migrate watch",
         "lint": "eslint .",
@@ -10,8 +10,8 @@
         "postinstall": "([ \"$NODE_ENV\" = production ] && npm run migrate) || ([ \"$NODE_ENV\" != production ] && echo 'Development mode...')",
         "start": "npm run develop",
         "test": "jest",
-        "watch": "npm-run-all -p watch:ts watch:node",
-        "watch:node": "nodemon --watch dist/app",
+        "watch": "npm-run-all --continue-on-error -p watch:ts watch:node",
+        "watch:node": "nodemon --watch dist",
         "watch:ts": "tsc -w"
     },
     "author": "",
@@ -38,6 +38,7 @@
         "eslint-plugin-jest": "^23.8.1",
         "eslint-plugin-prettier": "^3.1.2",
         "jest": "^25.1.0",
+        "nodemon": "^2.0.2",
         "npm-run-all": "^4.1.5",
         "prettier": "^1.19.1",
         "sqlite3": "^4.1.1",

@@ -16,6 +16,9 @@ meal_planner.sqlite3
 # dotenv environment variables file
 .env
 
+# Ignore built ts files
+dist/**/*
+
 # Misc.
 create-jwt.js
 worksheet.js
