@@ -29,5 +29,5 @@ export const fetchForUser = async (userId: number) => {
 
     const results = await qb;
 
-    return results.map((instance: TeamMember) => internalToSchema(instance.team));
+    return results.map((instance: any) => internalToSchema(instance.team));
 };

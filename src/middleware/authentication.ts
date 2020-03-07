@@ -8,6 +8,12 @@ const client = JwksRsa({
     rateLimit: true
 });
 
+interface DecodedJwtPayload {
+    payload: object;
+    header: any;
+    signature: any;
+}
+
 export const authenticate = async (request) => {
     // The request must contain the Authorization header field formatted as follows:
     //   Authorization: Bearer {token}
@@ -56,7 +62,7 @@ export const authenticate = async (request) => {
                 complete: true,
                 issuer: process.env.JWT_ISSUER
             },
-            (err, decoded) => {
+            (err, decoded: DecodedJwtPayload) => {
                 if (err) {
                     reject(err);
                     return;
