@@ -20,5 +20,4 @@ meal_planner.sqlite3
 dist/**/*
 
 # Misc.
-create-jwt.js
 worksheet.js
