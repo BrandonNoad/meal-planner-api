@@ -2,20 +2,20 @@ import { gql } from 'apollo-server';
 
 export default gql`
     type Team {
-        id: ID!
+        id: Int!
         name: String!
-        members: [User!]!
-        recipes: [Recipe!]!
-        scheduledRecipes: [ScheduledRecipe!]!
-        groceryLists: [GroceryList!]!
+        #members: [User!]!
+        #recipes: [Recipe!]!
+        #scheduledRecipes: [ScheduledRecipe!]!
+        #groceryLists: [GroceryList!]!
     }
 
     type User {
-        id: ID!
+        id: String!
     }
 
     type Recipe {
-        id: ID!
+        id: Int!
         name: String!
         url: String!
         # Separate resolver for this
@@ -23,20 +23,20 @@ export default gql`
     }
 
     type Ingredient {
-        id: ID!
+        id: Int!
         name: String!
         quantity: Float!
         unit: String!
     }
 
     type ScheduledRecipe {
-        id: ID!
+        id: Int!
         date: String!
         recipe: Recipe!
     }
 
     type GroceryList {
-        id: ID!
+        id: Int!
         name: String!
         year: Int!
         week: Int!
@@ -53,6 +53,7 @@ export default gql`
     }
 
     type Query {
+        teams: [Team!]
         scheduledRecipes(teamId: Int!, options: ScheduledRecipesOptions): [ScheduledRecipe!]
     }
 `;
