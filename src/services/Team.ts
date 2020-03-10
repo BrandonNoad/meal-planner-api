@@ -11,20 +11,14 @@ import { Team, TeamMember } from '../orm';
 //     groceryLists: [GroceryList!]!
 // }
 const internalToSchema = (instance: Team) => {
-    const { id, name, members } = instance.toJSON();
+    const { id, name } = instance.toJSON();
 
-    return {
-        id,
-        name,
-        members: members.map(({ id }) => ({
-            id
-        }))
-    };
+    return { id, name };
 };
 
 export const fetchForUser = async (userId: number) => {
     const qb = TeamMember.query()
-        .withGraphFetched('team.members')
+        .withGraphFetched('team')
         .where('auth0_user_id', userId);
 
     const results = await qb;

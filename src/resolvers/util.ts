@@ -7,7 +7,7 @@ import { authorize } from '../middleware/accessControl';
 
 interface QueryResolverFactoryConfig {
     auth?: boolean;
-    validate: {
+    validate?: {
         args: ObjectSchema;
     };
     accessControl?: boolean;
@@ -36,7 +36,6 @@ export const queryResolverFactory = (config: QueryResolverFactoryConfig) => asyn
 
             // Ensure that credentials.userId is valid.
 
-            // auth0|5c96a8c0b2b79f7179e732af
             const userIdSchema = Joi.string()
                 .trim()
                 .required();
@@ -53,11 +52,14 @@ export const queryResolverFactory = (config: QueryResolverFactoryConfig) => asyn
 
     // -- Validation
 
-    let argsForResolver;
-    try {
-        argsForResolver = await validate(args, config.validate.args);
-    } catch (e) {
-        throw new UserInputError('Bad Request');
+    let argsForResolver = args;
+
+    if (config.validate !== undefined) {
+        try {
+            argsForResolver = await validate(args, config.validate.args);
+        } catch (e) {
+            throw new UserInputError('Bad Request');
+        }
     }
 
     // -- Access Control

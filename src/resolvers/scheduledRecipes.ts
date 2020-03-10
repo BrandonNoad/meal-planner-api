@@ -28,7 +28,7 @@ const argsSchema = Joi.object({
                 .optional()
         }).optional()
     }).optional()
-});
+}).required();
 
 interface ScheduledRecipesArgs {
     teamId: number;
