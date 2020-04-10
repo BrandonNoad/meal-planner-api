@@ -93,6 +93,8 @@ exports.up = (knex) =>
 const dropScheduledRecipesTableFactory = (knex) => () =>
     knex.schema.dropTableIfExists('scheduled_recipes');
 
+const dropTeamRecipesTableFactory = (knex) => () => knex.schema.dropTableIfExists('team_recipes');
+
 const dropRecipesTableFactory = (knex) => () => knex.schema.dropTableIfExists('recipes');
 
 const dropTeamMembersTableFactory = (knex) => () => knex.schema.dropTableIfExists('team_members');
@@ -101,6 +103,7 @@ const dropTeamsTableFactory = (knex) => () => knex.schema.dropTableIfExists('tea
 
 exports.down = (knex) =>
     dropScheduledRecipesTableFactory(knex)()
+        .then(dropTeamRecipesTableFactory(knex))
         .then(dropRecipesTableFactory(knex))
         .then(dropTeamMembersTableFactory(knex))
         .then(dropTeamsTableFactory(knex));

@@ -7,6 +7,10 @@ class TeamMember extends BaseModel {
         return 'team_members';
     }
 
+    static get idColumn() {
+        return ['team_id', 'auth0_user_id'];
+    }
+
     static get relationMappings() {
         return {
             team: {

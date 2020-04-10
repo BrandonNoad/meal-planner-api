@@ -1,11 +1,11 @@
 import Joi, { ObjectSchema } from '@hapi/joi';
-import { AuthenticationError, UserInputError, ForbiddenError, IFieldResolver } from 'apollo-server';
+import { AuthenticationError, UserInputError, ForbiddenError } from 'apollo-server';
 
 import { authenticate } from '../middleware/authentication';
 import { validate } from '../middleware/validation';
 import { authorize } from '../middleware/accessControl';
 
-interface QueryResolverFactoryConfig {
+interface ResolverFactoryConfig {
     auth?: boolean;
     validate?: {
         args: ObjectSchema;
@@ -18,7 +18,7 @@ interface Credentials {
     userId?: number;
 }
 
-export const queryResolverFactory = (config: QueryResolverFactoryConfig) => async (
+export const resolverFactory = (config: ResolverFactoryConfig) => async (
     rootValue,
     args,
     context,

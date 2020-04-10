@@ -8,10 +8,6 @@ class Recipe extends BaseModel {
     static get jsonAttributes() {
         return ['meta'];
     }
-
-    static get relationMappings() {
-        return {};
-    }
 }
 
 export default Recipe;

@@ -24,7 +24,11 @@ const init = (knexEnvironmentConfig: KnexEnvironmentConfig) => {
 export default init;
 
 export { default as BaseModel } from './BaseModel';
+export { default as FoodItem } from './FoodItem';
+export { default as ImportRecipeTask } from './ImportRecipeTask';
+export { default as Ingredient } from './Ingredient';
 export { default as Recipe } from './Recipe';
 export { default as ScheduledRecipe } from './ScheduledRecipe';
 export { default as Team } from './Team';
 export { default as TeamMember } from './TeamMember';
+export { default as TeamRecipe } from './TeamRecipe';

@@ -18,15 +18,13 @@ export default gql`
         id: Int!
         name: String!
         url: String!
-        # Separate resolver for this
-        # ingredients: [Ingredient!]!
+        ingredients: [Ingredient!]!
     }
 
     type Ingredient {
-        id: Int!
         name: String!
         quantity: Float!
-        unit: String!
+        unit: String
     }
 
     type ScheduledRecipe {
@@ -44,6 +42,13 @@ export default gql`
         items: String!
     }
 
+    type ImportRecipeTask {
+        team: Team!
+        state: String!
+        url: String!
+        recipe: Recipe
+    }
+
     input ScheduledRecipesFilter {
         date: [String]
     }
@@ -55,5 +60,9 @@ export default gql`
     type Query {
         teams: [Team!]
         scheduledRecipes(teamId: Int!, options: ScheduledRecipesOptions): [ScheduledRecipe!]
+    }
+
+    type Mutation {
+        importRecipe(teamId: Int!, url: String!): ImportRecipeTask!
     }
 `;

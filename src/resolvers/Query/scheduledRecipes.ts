@@ -2,8 +2,8 @@ import BaseJoi, { ObjectSchema } from '@hapi/joi';
 import JoiDate from '@hapi/joi-date';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { queryResolverFactory } from './util';
-import * as ScheduledRecipeService from '../services/ScheduledRecipe';
+import { resolverFactory } from '../util';
+import { ScheduledRecipe } from '../../orm';
 
 const argsSchema = Joi.object({
     teamId: Joi.number()
@@ -39,12 +39,25 @@ interface ScheduledRecipesArgs {
     };
 }
 
-const resolver = (rootValue: undefined, { teamId, options }: ScheduledRecipesArgs) =>
-    ScheduledRecipeService.fetchForTeam(teamId, options);
+const resolver = async (rootValue: undefined, { teamId, options = {} }: ScheduledRecipesArgs) => {
+    let qb = ScheduledRecipe.query().where('team_id', teamId);
 
-export default queryResolverFactory({
-    validate: {
-        args: argsSchema
-    },
+    const { filter = {} } = options;
+
+    if (filter.date !== undefined) {
+        qb = qb.whereIn('date_scheduled', filter.date);
+    }
+
+    const results = await qb;
+
+    return results.map((instance: any) => ({
+        id: instance.id,
+        date: instance.dateScheduled,
+        recipeId: instance.recipeId
+    }));
+};
+
+export default resolverFactory({
+    validate: { args: argsSchema },
     resolver
 });
