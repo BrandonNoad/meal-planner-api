@@ -7,11 +7,15 @@ const resolver = async ({ id }) => {
 
     const results = await qb;
 
-    return results.map((result) => ({
-        name: result.foodItem.name,
-        quantity: result.quantity,
-        unit: result.unit
-    }));
+    return results.map((instance) => {
+        const result = instance.toJSON();
+
+        return {
+            name: result.foodItem.name,
+            quantity: result.quantity,
+            unit: result.unit
+        };
+    });
 };
 
 export default resolver;

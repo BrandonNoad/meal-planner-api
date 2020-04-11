@@ -1,7 +1,9 @@
-import teams from './teams';
+import recipes from './recipes';
 import scheduledRecipes from './scheduledRecipes';
+import teams from './teams';
 
 export default {
-    teams,
-    scheduledRecipes
+    recipes,
+    scheduledRecipes,
+    teams
 };

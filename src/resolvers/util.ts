@@ -10,7 +10,11 @@ interface ResolverFactoryConfig {
     validate?: {
         args: ObjectSchema;
     };
-    accessControl?: boolean;
+    accessControl?:
+        | boolean
+        | {
+              fetchTeamId: (args) => Promise<number | undefined>;
+          };
     resolver: any;
 }
 
@@ -65,8 +69,13 @@ export const resolverFactory = (config: ResolverFactoryConfig) => async (
     // -- Access Control
 
     if (config.accessControl !== false) {
+        const teamId: number | undefined =
+            config.accessControl === undefined || config.accessControl === true
+                ? args.teamId
+                : await config.accessControl.fetchTeamId(args);
+
         try {
-            await authorize({ credentials, args });
+            await authorize({ credentials, teamId });
         } catch (e) {
             throw new ForbiddenError('Forbidden');
         }

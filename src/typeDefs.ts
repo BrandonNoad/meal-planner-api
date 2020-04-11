@@ -60,9 +60,12 @@ export default gql`
     type Query {
         teams: [Team!]
         scheduledRecipes(teamId: Int!, options: ScheduledRecipesOptions): [ScheduledRecipe!]
+        recipes(teamId: Int!): [Recipe!]
     }
 
     type Mutation {
         importRecipe(teamId: Int!, url: String!): ImportRecipeTask!
+        addRecipe(teamId: Int!, recipeId: Int!, date: String!): ScheduledRecipe!
+        removeRecipe(id: Int!): Boolean!
     }
 `;

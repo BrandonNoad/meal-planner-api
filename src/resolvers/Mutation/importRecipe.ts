@@ -1,6 +1,4 @@
-import BaseJoi, { ObjectSchema } from '@hapi/joi';
-import JoiDate from '@hapi/joi-date';
-const Joi = BaseJoi.extend(JoiDate);
+import Joi, { ObjectSchema } from '@hapi/joi';
 import Axios from 'axios';
 
 import { resolverFactory } from '../util';
@@ -62,8 +60,8 @@ const importRecipe = async (importRecipeTaskId, teamId, url) => {
 
             // TODO: batch inserts?
             const insertIngredientQb = Ingredient.query().insertAndFetch({
-                recipe_id: recipeId,
-                food_item_id: foodItem.id,
+                recipeId,
+                foodItemId: foodItem.id,
                 quantity: ingredient.amount,
                 unit: ingredient.unit === '' ? null : ingredient.unit
             });
@@ -72,15 +70,12 @@ const importRecipe = async (importRecipeTaskId, teamId, url) => {
         })
     );
 
-    const insertTeamRecipeQb = TeamRecipe.query().insert({
-        recipe_id: recipeId,
-        team_id: teamId
-    });
+    const insertTeamRecipeQb = TeamRecipe.query().insert({ recipeId, teamId: teamId });
 
     await insertTeamRecipeQb;
 
     const updateImportRecipeTaskQb = ImportRecipeTask.query()
-        .update({ recipe_id: recipeId, state: 'Done' })
+        .update({ recipeId, state: 'Done' })
         .where('id', importRecipeTaskId);
 
     return updateImportRecipeTaskQb.execute();
@@ -92,7 +87,7 @@ const importRecipe = async (importRecipeTaskId, teamId, url) => {
 };
 
 const resolver = async (rootValue: undefined, { teamId, url }: ImportRecipeArgs) => {
-    const qb = ImportRecipeTask.query().insertAndFetch({ team_id: teamId, state: 'Pending', url });
+    const qb = ImportRecipeTask.query().insertAndFetch({ teamId, state: 'Pending', url });
 
     const result = await qb;
 
@@ -108,8 +103,6 @@ const resolver = async (rootValue: undefined, { teamId, url }: ImportRecipeArgs)
 };
 
 export default resolverFactory({
-    validate: {
-        args: argsSchema
-    },
+    validate: { args: argsSchema },
     resolver
 });

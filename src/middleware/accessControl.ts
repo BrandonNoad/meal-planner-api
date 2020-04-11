@@ -1,20 +1,35 @@
-import * as TeamService from '../services/Team';
+import { TeamMember, Team } from '../orm';
 
-export const authorize = async ({ credentials, args }) => {
+interface Credentials {
+    userId?: number;
+}
+
+interface AuthorizeArgs {
+    credentials: Credentials;
+    teamId: number | undefined;
+}
+
+export const authorize = async ({ credentials, teamId }: AuthorizeArgs) => {
     if (credentials.userId === undefined) {
         throw new Error('Invalid credentials');
     }
 
-    if (args.teamId === undefined) {
-        throw new Error('args is missing the teamId');
+    if (teamId === undefined) {
+        throw new Error('Invalid teamId');
     }
 
-    const teamsForUser = await TeamService.fetchForUser(credentials.userId);
+    const qb = TeamMember.query()
+        .withGraphFetched('team')
+        .where('auth0_user_id', credentials.userId);
 
-    const match = teamsForUser.find(({ id }) => id === args.teamId);
+    const results = await qb;
+
+    const teamsForUser = results.map((instance: any) => ({ ...instance.team }));
+
+    const match = teamsForUser.find(({ id }) => id === teamId);
 
     if (match === undefined) {
-        throw new Error(`Not a team member of team ${args.teamId}`);
+        throw new Error(`Not a team member of team ${teamId}`);
     }
 
     return true;

@@ -3,6 +3,12 @@ import { BaseModel, FoodItem } from '.';
 const { BelongsToOneRelation } = BaseModel;
 
 class Ingredient extends BaseModel {
+    id: number;
+    recipeId: number;
+    foodItemId: number;
+    quantity: number;
+    unit: string | null;
+
     static get tableName() {
         return 'ingredients';
     }

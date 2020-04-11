@@ -3,6 +3,9 @@ import { BaseModel, Team } from '.';
 const { BelongsToOneRelation } = BaseModel;
 
 class TeamMember extends BaseModel {
+    teamId: number;
+    auth0UserId: number;
+
     static get tableName() {
         return 'team_members';
     }

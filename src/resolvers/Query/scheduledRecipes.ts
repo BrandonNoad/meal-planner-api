@@ -50,10 +50,8 @@ const resolver = async (rootValue: undefined, { teamId, options = {} }: Schedule
 
     const results = await qb;
 
-    return results.map((instance: any) => ({
-        id: instance.id,
-        date: instance.dateScheduled,
-        recipeId: instance.recipeId
+    return results.map((instance) => ({
+        ...instance.toJSON()
     }));
 };
 

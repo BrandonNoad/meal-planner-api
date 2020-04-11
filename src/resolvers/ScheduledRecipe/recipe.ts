@@ -9,7 +9,7 @@ const resolver = async ({ recipeId }) => {
         return null;
     }
 
-    const { id, name, url } = result;
+    const { id, name, url } = result.toJSON();
 
     return { id, name, url };
 };
