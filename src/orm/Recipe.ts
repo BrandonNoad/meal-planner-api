@@ -1,4 +1,6 @@
-import { BaseModel } from '.';
+import { BaseModel, Ingredient } from '.';
+
+const { HasManyRelation } = BaseModel;
 
 class Recipe extends BaseModel {
     id: number;
@@ -12,6 +14,19 @@ class Recipe extends BaseModel {
 
     static get jsonAttributes() {
         return ['meta'];
+    }
+
+    static get relationMappings() {
+        return {
+            ingredients: {
+                relation: HasManyRelation,
+                modelClass: Ingredient,
+                join: {
+                    from: 'recipes.id',
+                    to: 'ingredients.recipe_id'
+                }
+            }
+        };
     }
 }
 

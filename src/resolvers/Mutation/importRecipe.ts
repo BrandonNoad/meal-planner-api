@@ -70,7 +70,7 @@ const importRecipe = async (importRecipeTaskId, teamId, url) => {
         })
     );
 
-    const insertTeamRecipeQb = TeamRecipe.query().insert({ recipeId, teamId: teamId });
+    const insertTeamRecipeQb = TeamRecipe.query().insert({ recipeId, teamId });
 
     await insertTeamRecipeQb;
 

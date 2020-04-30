@@ -25,6 +25,7 @@ export default init;
 
 export { default as BaseModel } from './BaseModel';
 export { default as FoodItem } from './FoodItem';
+export { default as GroceryList } from './GroceryList';
 export { default as ImportRecipeTask } from './ImportRecipeTask';
 export { default as Ingredient } from './Ingredient';
 export { default as Recipe } from './Recipe';

@@ -26,18 +26,14 @@ const argsSchema = Joi.object({
         .required()
 }).required();
 
-interface ScheduleRecipeArgs {
+interface AddRecipeArgs {
     teamId: number;
     recipeId: number;
     date: string;
 }
 
-const resolver = (rootValue: undefined, { teamId, recipeId, date }: ScheduleRecipeArgs) => {
-    const qb = ScheduledRecipe.query().insertAndFetch({
-        teamId: teamId,
-        recipeId: recipeId,
-        dateScheduled: date
-    });
+const resolver = (rootValue: undefined, { teamId, recipeId, date }: AddRecipeArgs) => {
+    const qb = ScheduledRecipe.query().insertAndFetch({ teamId, recipeId, dateScheduled: date });
 
     return qb.execute();
 };

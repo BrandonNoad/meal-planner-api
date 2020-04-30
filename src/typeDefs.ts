@@ -33,20 +33,24 @@ export default gql`
         recipe: Recipe!
     }
 
-    type GroceryList {
-        id: Int!
-        name: String!
-        year: Int!
-        week: Int!
-        # Maybe a separate resolver for this
-        items: String!
-    }
-
     type ImportRecipeTask {
-        team: Team!
         state: String!
         url: String!
         recipe: Recipe
+    }
+
+    type GroceryList {
+        id: Int!
+        date: String!
+        name: String!
+        items: [GroceryListItem!]!
+    }
+
+    type GroceryListItem {
+        name: String!
+        category: String!
+        quantity: Float!
+        unit: String
     }
 
     input ScheduledRecipesFilter {
@@ -67,5 +71,6 @@ export default gql`
         importRecipe(teamId: Int!, url: String!): ImportRecipeTask!
         addRecipe(teamId: Int!, recipeId: Int!, date: String!): ScheduledRecipe!
         removeRecipe(id: Int!): Boolean!
+        createGroceryList(teamId: Int!, date: String!): GroceryList!
     }
 `;

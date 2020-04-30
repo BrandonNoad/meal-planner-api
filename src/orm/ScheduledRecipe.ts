@@ -1,4 +1,6 @@
-import { BaseModel } from '.';
+import { BaseModel, Recipe } from '.';
+
+const { BelongsToOneRelation } = BaseModel;
 
 class ScheduledRecipe extends BaseModel {
     id: number;
@@ -8,6 +10,19 @@ class ScheduledRecipe extends BaseModel {
 
     static get tableName() {
         return 'scheduled_recipes';
+    }
+
+    static get relationMappings() {
+        return {
+            recipe: {
+                relation: BelongsToOneRelation,
+                modelClass: Recipe,
+                join: {
+                    from: 'scheduled_recipes.recipe_id',
+                    to: 'recipes.id'
+                }
+            }
+        };
     }
 }
 
