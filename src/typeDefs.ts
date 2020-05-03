@@ -53,18 +53,19 @@ export default gql`
         unit: String
     }
 
-    input ScheduledRecipesFilter {
+    input FilterByDate {
         date: [String]
     }
 
-    input ScheduledRecipesOptions {
-        filter: ScheduledRecipesFilter
+    input QueryOptions {
+        filter: FilterByDate
     }
 
     type Query {
         teams: [Team!]
-        scheduledRecipes(teamId: Int!, options: ScheduledRecipesOptions): [ScheduledRecipe!]
+        scheduledRecipes(teamId: Int!, options: QueryOptions): [ScheduledRecipe!]
         recipes(teamId: Int!): [Recipe!]
+        groceryLists(teamId: Int!, options: QueryOptions): [GroceryList!]
     }
 
     type Mutation {
