@@ -53,19 +53,26 @@ export default gql`
         unit: String
     }
 
-    input FilterByDate {
+    input DateFilterInput {
         date: [String]
     }
 
-    input QueryOptions {
-        filter: FilterByDate
+    input QueryOptionsInput {
+        filter: DateFilterInput
     }
 
     type Query {
         teams: [Team!]
-        scheduledRecipes(teamId: Int!, options: QueryOptions): [ScheduledRecipe!]
-        recipes(teamId: Int!): [Recipe!]
-        groceryLists(teamId: Int!, options: QueryOptions): [GroceryList!]
+        scheduledRecipes(teamId: Int!, options: QueryOptionsInput): [ScheduledRecipe!]!
+        recipes(teamId: Int!): [Recipe!]!
+        groceryLists(teamId: Int!, options: QueryOptionsInput): [GroceryList!]!
+    }
+
+    input GroceryListItemInput {
+        name: String!
+        category: String!
+        quantity: Float!
+        unit: String
     }
 
     type Mutation {
@@ -73,5 +80,7 @@ export default gql`
         addRecipe(teamId: Int!, recipeId: Int!, date: String!): ScheduledRecipe!
         removeRecipe(id: Int!): Boolean!
         createGroceryList(teamId: Int!, date: String!): GroceryList!
+        deleteGroceryList(id: Int!): Boolean!
+        updateGroceryList(id: Int!, items: [GroceryListItemInput!]!): GroceryList!
     }
 `;
