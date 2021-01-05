@@ -25,7 +25,7 @@
         "@hapi/joi": "^17.1.0",
         "@hapi/joi-date": "^2.0.1",
         "apollo-server": "^2.11.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "dotenv": "^8.2.0",
         "graphql": "^14.6.0",
         "hapi-auth-jwt2": "^9.0.1",
