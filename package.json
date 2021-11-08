@@ -24,7 +24,7 @@
         "@hapi/hapi": "^19.1.1",
         "@hapi/joi": "^17.1.0",
         "@hapi/joi-date": "^2.0.1",
-        "apollo-server": "^2.11.0",
+        "apollo-server": "^2.25.3",
         "axios": "^0.19.2",
         "dotenv": "^8.2.0",
         "graphql": "^14.6.0",
