@@ -27,7 +27,7 @@ const importRecipe = async (importRecipeTaskId, teamId, url) => {
         {
             headers: {
                 'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
-                'x-rapidapi-key': '9U7HvEFjIymshw8KnNtgianqZYIPp1DlQm5jsntZR5cVhwAz8W'
+                'x-rapidapi-key': 'API_KEY'
             },
             params: { url }
         }
